@@ -19,7 +19,7 @@ For more information, see files README.md, LICENSE.txt.
 #define VK_NO_PROTOTYPES 1
 #include <vulkan/vulkan.h>
 
-static const wchar_t* const VULKAN_SDK_VERSION = L"1.4.331.0";
+static const wchar_t* const VULKAN_SDK_VERSION = L"1.4.358.0";
 
 ////////////////////////////////////////////////////////////////////////////////
 // PRIVATE
@@ -47,6 +47,14 @@ ENUM_BEGIN(VkDriverId)
     ENUM_ITEM(VK_DRIVER_ID_MESA_PANVK)
     ENUM_ITEM(VK_DRIVER_ID_SAMSUNG_PROPRIETARY)
     ENUM_ITEM(VK_DRIVER_ID_MESA_VENUS)
+    ENUM_ITEM(VK_DRIVER_ID_MESA_DOZEN)
+    ENUM_ITEM(VK_DRIVER_ID_MESA_NVK)
+    ENUM_ITEM(VK_DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA)
+    ENUM_ITEM(VK_DRIVER_ID_MESA_HONEYKRISP)
+    ENUM_ITEM(VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN)
+    ENUM_ITEM(VK_DRIVER_ID_MESA_KOSMICKRISP)
+    ENUM_ITEM(VK_DRIVER_ID_MESA_GFXSTREAM)
+    ENUM_ITEM(VK_DRIVER_ID_APE_SOFT)
 ENUM_END(VkDriverId)
 
 ENUM_BEGIN(VkPhysicalDeviceType)
@@ -117,7 +125,7 @@ static bool FindPhysicalDevice(const DXGI_ADAPTER_DESC& adapterDesc, size_t& out
 
 void Vulkan_Initialize_RAII::PrintStaticParams()
 {
-    // Empty.
+    ReportFormatter::GetInstance().AddFieldString(L"Vulkan-Headers compiled version", VULKAN_SDK_VERSION);
 }
 
 Vulkan_Initialize_RAII::Vulkan_Initialize_RAII()

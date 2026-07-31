@@ -20,7 +20,7 @@ public:
 
     struct DeviceId
     {
-        uint32_t deviceId, revisionId;
+        uint32_t vendorId, deviceId, revisionId;
     };
     void PrintDeviceData(const DeviceId& id);
 };

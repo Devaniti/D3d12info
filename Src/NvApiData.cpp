@@ -19,7 +19,7 @@ For more information, see files README.md, LICENSE.txt.
 #include <nvapi.h>
 
 // Don't forget to update when linking with a new version!
-static const wchar_t* NVAPI_COMPILED_VERSION = L"R580";
+static const wchar_t* NVAPI_COMPILED_VERSION = L"R610";
 
 ////////////////////////////////////////////////////////////////////////////////
 // PRIVATE
@@ -433,7 +433,107 @@ ENUM_BEGIN(NVAPI_NVLINK_CAPS)
     ENUM_ITEM(NVAPI_NVLINK_CAPS_POWER_STATE_L1)
     ENUM_ITEM(NVAPI_NVLINK_CAPS_POWER_STATE_L2)
     ENUM_ITEM(NVAPI_NVLINK_CAPS_POWER_STATE_L3)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_VALID)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_UNCONTAINED_ERROR_RECOVERY)
 ENUM_END(NVAPI_NVLINK_CAPS)
+
+ENUM_BEGIN(NVAPI_NVLINK_CAPS_NVLINK_VERSION)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_INVALID)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_1_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_2_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_2_2)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_3_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_3_1)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_4_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NVLINK_VERSION_5_0)
+ENUM_END(NVAPI_NVLINK_CAPS_NVLINK_VERSION)
+
+ENUM_BEGIN(NVAPI_NVLINK_CAPS_NCI_VERSION)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_INVALID)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_1_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_2_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_2_2)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_3_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_3_1)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_4_0)
+    ENUM_ITEM(NVAPI_NVLINK_CAPS_NCI_VERSION_5_0)
+ENUM_END(NVAPI_NVLINK_CAPS_NCI_VERSION)
+
+ENUM_BEGIN(NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS_NONE)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS_PCI)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS_UUID)
+ENUM_END(NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS)
+
+ENUM_BEGIN(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_EBRIDGE)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_NPU)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_GPU)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_SWITCH)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_TEGRA)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE_NONE)
+    ENUM_ITEM(NVAPI_NVLINK_DEVICE_INFO_DEVICE_UUID_INVALID)
+ENUM_END(NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE)
+
+ENUM_BEGIN(NVAPI_NVLINK_STATUS_LINK_STATE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_UNKNOWN)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_INIT)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_HWCFG)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_SWCFG)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_ACTIVE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_FAULT)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_RECOVERY)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_RECOVERY_AC)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_RECOVERY_AX)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LINK_STATE_INVALID)
+ENUM_END(NVAPI_NVLINK_STATUS_LINK_STATE)
+
+ENUM_BEGIN(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_UNKNOWN)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_HIGH_SPEED_1)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_LOW_POWER)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_TRAINING)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_SAFE_MODE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_OFF)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_TEST)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_FAULT)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE_INVALID)
+ENUM_END(NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE)
+
+ENUM_BEGIN(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_UNKNOWN)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_HIGH_SPEED_1)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_LOW_POWER)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_TRAINING)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_SAFE_MODE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_OFF)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_TEST)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_FAULT)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE_INVALID)
+ENUM_END(NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE)
+
+ENUM_BEGIN(NVAPI_NVLINK_STATUS_PHY)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_PHY_NVHS)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_PHY_GRS)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_PHY_INVALID)
+ENUM_END(NVAPI_NVLINK_STATUS_PHY)
+
+ENUM_BEGIN(NVAPI_NVLINK_REFCLK_TYPE)
+    ENUM_ITEM(NVAPI_NVLINK_REFCLK_TYPE_INVALID)
+    ENUM_ITEM(NVAPI_NVLINK_REFCLK_TYPE_NVHS)
+    ENUM_ITEM(NVAPI_NVLINK_REFCLK_TYPE_PEX)
+ENUM_END(NVAPI_NVLINK_REFCLK_TYPE)
+
+ENUM_BEGIN(NVAPI_NVLINK_STATUS_LOOP_PROPERTY)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LOOP_PROPERTY_NONE)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LOOP_PROPERTY_LOOPBACK)
+    ENUM_ITEM(NVAPI_NVLINK_STATUS_LOOP_PROPERTY_LOOPOUT)
+ENUM_END(NVAPI_NVLINK_STATUS_LOOP_PROPERTY)
+
+ENUM_BEGIN(NV_NGX_DRIVER_FEATURE_ID)
+    ENUM_ITEM(NV_NGX_DRIVER_FEATURE_ID_SET_FLIP_CONFIG_V2)
+    ENUM_ITEM(NV_NGX_DRIVER_FEATURE_ID_FRAME_PRESENT_NOTIFY_HYBRID)
+ENUM_END(NV_NGX_DRIVER_FEATURE_ID)
 
 ENUM_BEGIN(NV_ADAPTER_TYPE)
     ENUM_ITEM(NV_ADAPTER_TYPE_UNKNOWN)
@@ -578,6 +678,88 @@ static void PrintCooperativeVectorProperties(const std::vector<NVAPI_COOPERATIVE
     }
 }
 
+static uint32_t GetNvLinkMaskCount(const NVAPI_NVLINK_LINK_MASK_V1& links)
+{
+    return std::min<uint32_t>(links.lenMasks, uint32_t(std::size(links.masks)));
+}
+
+static bool NvLinkMaskContains(const NVAPI_NVLINK_LINK_MASK_V1& links, size_t linkIndex)
+{
+    const size_t maskIndex = linkIndex / 64;
+    return maskIndex < GetNvLinkMaskCount(links) && (links.masks[maskIndex] & (NvU64(1) << (linkIndex % 64))) != 0;
+}
+
+static void PrintNvLinkMask(std::wstring_view name, const NVAPI_NVLINK_LINK_MASK_V1& links)
+{
+    ReportScopeObject scope(name);
+    ReportFormatter& formatter = ReportFormatter::GetInstance();
+    const uint32_t maskCount = GetNvLinkMaskCount(links);
+    formatter.AddFieldUint32(L"lenMasks", maskCount);
+
+    ReportScopeArray masksScope(L"masks");
+    for(uint32_t maskIndex = 0; maskIndex < maskCount; ++maskIndex)
+    {
+        ReportScopeArrayItem maskScope;
+        formatter.AddFieldUint32(L"index", maskIndex);
+        formatter.AddFieldUint64(L"value", links.masks[maskIndex]);
+    }
+}
+
+static void PrintNvLinkDeviceInfo(std::wstring_view name, const NVLINK_DEVICE_INFO_V1& info)
+{
+    ReportScopeObject scope(name);
+    ReportFormatter& formatter = ReportFormatter::GetInstance();
+    formatter.AddFieldFlags(
+        L"deviceIdFlags", info.deviceIdFlags, Enum_NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS);
+    formatter.AddFieldEnum(
+        L"deviceType", uint32_t(info.deviceType), Enum_NVAPI_NVLINK_DEVICE_INFO_DEVICE_TYPE);
+
+    if(info.deviceIdFlags & NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS_PCI)
+    {
+        formatter.AddFieldUint32(L"domain", info.domain);
+        formatter.AddFieldUint32(L"bus", info.bus);
+        formatter.AddFieldUint32(L"device", info.device);
+        formatter.AddFieldUint32(L"function", info.function);
+        formatter.AddFieldHex32(L"pciDeviceId", info.pciDeviceId);
+    }
+
+    if(info.deviceIdFlags & NVAPI_NVLINK_DEVICE_INFO_DEVICE_ID_FLAGS_UUID)
+        formatter.AddFieldHexBytes(L"deviceUUID", info.deviceUUID, NVAPI_UUID_LEN);
+}
+
+static void PrintNvLinkStatus(size_t linkIndex, const NVLINK_LINK_STATUS_INFO_V2& info)
+{
+    ReportScopeArrayItem scope;
+    ReportFormatter& formatter = ReportFormatter::GetInstance();
+    formatter.AddFieldUint32(L"linkIndex", uint32_t(linkIndex));
+    formatter.AddFieldFlags(L"capsTbl", info.capsTbl, Enum_NVAPI_NVLINK_CAPS);
+    formatter.AddFieldEnum(L"phyType", info.phyType, Enum_NVAPI_NVLINK_STATUS_PHY);
+    formatter.AddFieldUint32(L"subLinkWidth", info.subLinkWidth);
+    formatter.AddFieldEnum(L"linkState", info.linkState, Enum_NVAPI_NVLINK_STATUS_LINK_STATE);
+    formatter.AddFieldEnum(
+        L"rxSublinkStatus", info.rxSublinkStatus, Enum_NVAPI_NVLINK_STATUS_SUBLINK_RX_STATE);
+    formatter.AddFieldEnum(
+        L"txSublinkStatus", info.txSublinkStatus, Enum_NVAPI_NVLINK_STATUS_SUBLINK_TX_STATE);
+    formatter.AddFieldEnum(
+        L"nvlinkVersion", info.nvlinkVersion, Enum_NVAPI_NVLINK_CAPS_NVLINK_VERSION);
+    formatter.AddFieldEnum(L"nciVersion", info.nciVersion, Enum_NVAPI_NVLINK_CAPS_NCI_VERSION);
+    formatter.AddFieldUint32(L"phyVersion", info.phyVersion);
+    formatter.AddFieldUint32(L"nvlinkCommonClockSpeedMhz", info.nvlinkCommonClockSpeedMhz, L"MHz");
+    formatter.AddFieldUint32(L"nvlinkRefClkSpeedMhz", info.nvlinkRefClkSpeedMhz, L"MHz");
+    formatter.AddFieldEnum(L"nvlinkRefClkType", info.nvlinkRefClkType, Enum_NVAPI_NVLINK_REFCLK_TYPE);
+    formatter.AddFieldUint32(L"nvlinkLinkClockMhz", info.nvlinkLinkClockMhz, L"MHz");
+    formatter.AddFieldBool(L"connected", info.connected != 0);
+    formatter.AddFieldEnum(L"loopProperty", info.loopProperty, Enum_NVAPI_NVLINK_STATUS_LOOP_PROPERTY);
+    formatter.AddFieldUint32(L"remoteDeviceLinkNumber", info.remoteDeviceLinkNumber);
+    PrintNvLinkDeviceInfo(L"remoteDeviceInfo", info.remoteDeviceInfo);
+    formatter.AddFieldUint32(L"localDeviceLinkNumber", info.localDeviceLinkNumber);
+    PrintNvLinkDeviceInfo(L"localDeviceInfo", info.localDeviceInfo);
+    formatter.AddFieldUint32(L"nvlinkLineRateMbps", info.nvlinkLineRateMbps, L"Mbps");
+    formatter.AddFieldUint32(L"nvlinkMinL1Threshold", info.nvlinkMinL1Threshold);
+    formatter.AddFieldUint32(L"nvlinkMaxL1Threshold", info.nvlinkMaxL1Threshold);
+    formatter.AddFieldUint32(L"nvlinkL1ThresholdUnits", info.nvlinkL1ThresholdUnits);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // PUBLIC
 
@@ -634,6 +816,27 @@ void NvAPI_Inititalize_RAII::PrintData()
             formatter.AddFieldBool(
                 L"bIsNVIDIARTXNewFeatureBranchPackage", info.bIsNVIDIARTXNewFeatureBranchPackage != 0);
             formatter.AddFieldString(L"szBuildBaseBranch", StrToWstr(info.szBuildBaseBranch, CP_ACP).c_str());
+        }
+    }
+
+    {
+        NV_NGX_GET_DRIVER_FEATURE_SUPPORT_PARAMS params = {};
+        params.version = NV_NGX_GET_DRIVER_FEATURE_SUPPORT_PARAMS_VER;
+        params.featureCount = 2;
+        params.featureSupportInfo[0].featureId = NV_NGX_DRIVER_FEATURE_ID_SET_FLIP_CONFIG_V2;
+        params.featureSupportInfo[1].featureId = NV_NGX_DRIVER_FEATURE_ID_FRAME_PRESENT_NOTIFY_HYBRID;
+
+        if(NvAPI_NGX_GetDriverFeatureSupport(&params) == NVAPI_OK)
+        {
+            ReportScopeObject scope(L"NvAPI_NGX_GetDriverFeatureSupport");
+            for(NvU32 featureIndex = 0; featureIndex < params.featureCount; ++featureIndex)
+            {
+                const NV_NGX_DRIVER_FEATURE_SUPPORT_INFO& feature = params.featureSupportInfo[featureIndex];
+                const wchar_t* featureName =
+                    FindEnumItemName(uint32_t(feature.featureId), Enum_NV_NGX_DRIVER_FEATURE_ID);
+                if(featureName != nullptr)
+                    formatter.AddFieldBool(featureName, feature.bSupported != 0);
+            }
         }
     }
 }
@@ -960,6 +1163,56 @@ void NvAPI_Inititalize_RAII::PrintPhysicalGpuData(const LUID& adapterLuid)
         {
             formatter.AddFieldHexBytes(L"NvAPI_GPU_GetGspFeatures - NV_GPU_GSP_INFO::firmwareVersion",
                 gspInfo.firmwareVersion, NVAPI_GPU_MAX_BUILD_VERSION_LENGTH);
+        }
+    }
+
+    {
+        NV_GPU_UUID uuid = { NV_GPU_UUID_VER };
+        if(NvAPI_GPU_GetUUID(gpu, &uuid) == NVAPI_OK)
+            formatter.AddFieldHexBytes(L"NvAPI_GPU_GetUUID - NV_GPU_UUID::uuid", uuid.uuid, NVAPI_UUID_LEN);
+    }
+
+    {
+        NV_GPU_OVERCLOCK_STATUS overclockStatus = { NV_GPU_OVERCLOCK_STATUS_VER };
+        if(NvAPI_GPU_GetOverclockStatus(gpu, &overclockStatus) == NVAPI_OK)
+        {
+            formatter.AddFieldBool(L"NvAPI_GPU_GetOverclockStatus - "
+                                   L"NV_GPU_OVERCLOCK_STATUS::bOverclockingDetected",
+                overclockStatus.bOverclockingDetected != 0);
+        }
+    }
+
+    {
+        NVLINK_GET_CAPS_EX caps = { NVLINK_GET_CAPS_EX_VER };
+        if(NvAPI_GPU_NVLINK_GetCapsEx(gpu, &caps) == NVAPI_OK)
+        {
+            ReportScopeObject capsScope(L"NvAPI_GPU_NVLINK_GetCapsEx");
+            formatter.AddFieldFlags(L"capsTbl", caps.capsTbl, Enum_NVAPI_NVLINK_CAPS);
+            formatter.AddFieldEnum(
+                L"lowestNvlinkVersion", caps.lowestNvlinkVersion, Enum_NVAPI_NVLINK_CAPS_NVLINK_VERSION);
+            formatter.AddFieldEnum(
+                L"highestNvlinkVersion", caps.highestNvlinkVersion, Enum_NVAPI_NVLINK_CAPS_NVLINK_VERSION);
+            formatter.AddFieldEnum(
+                L"lowestNciVersion", caps.lowestNciVersion, Enum_NVAPI_NVLINK_CAPS_NCI_VERSION);
+            formatter.AddFieldEnum(
+                L"highestNciVersion", caps.highestNciVersion, Enum_NVAPI_NVLINK_CAPS_NCI_VERSION);
+            PrintNvLinkMask(L"links", caps.links);
+        }
+    }
+
+    {
+        NVLINK_GET_STATUS_EX status = { NVLINK_GET_STATUS_EX_VER };
+        if(NvAPI_GPU_NVLINK_GetStatusEx(gpu, &status) == NVAPI_OK)
+        {
+            ReportScopeObject statusScope(L"NvAPI_GPU_NVLINK_GetStatusEx");
+            PrintNvLinkMask(L"activeLinks", status.links);
+
+            ReportScopeArray linksScope(L"linkInfo");
+            for(size_t linkIndex = 0; linkIndex < NVAPI_NVLINK_MAX_LINKS_V2; ++linkIndex)
+            {
+                if(NvLinkMaskContains(status.links, linkIndex))
+                    PrintNvLinkStatus(linkIndex, status.linkInfo[linkIndex]);
+            }
         }
     }
 }

@@ -3,6 +3,11 @@
 Changes:
 
 - Fixed a hang with an infinite loop when passing an incorrect command-line parameter like `-help`.
+- Updated NVAPI from R580 to R610-Developer.
+  - Added reporting for GPU UUID, GPU overclock status, extended NVLink capabilities and status, and NGX driver feature support.
+- Updated AMD device_info to v1.0.
+  - Migrated to its new public API and added reporting for derived SIMD, shader-array, VGPR, and LDS-size data.
+- Updated Vulkan-Headers from 1.4.331 to 1.4.358 and added names for the latest Vulkan driver IDs.
 
 # Version 3.18.0 (2026-05-28)
 

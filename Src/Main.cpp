@@ -1753,7 +1753,7 @@ static void ListAdapter(uint32_t adapterIndex, IDXGIAdapter* adapter, NvAPI_Init
         bool useAmdDeviceInfo = g_ForceVendorAPI || desc.VendorId == VENDOR_ID_AMD;
         if(useAmdDeviceInfo && amdDeviceInfo)
         {
-            AmdDeviceInfo_Initialize_RAII::DeviceId deviceId = { desc.DeviceId, desc.Revision };
+            AmdDeviceInfo_Initialize_RAII::DeviceId deviceId = { desc.VendorId, desc.DeviceId, desc.Revision };
             amdDeviceInfo->PrintDeviceData(deviceId);
         }
 #endif
@@ -1826,7 +1826,7 @@ int InspectAdapter(NvAPI_Inititalize_RAII* nvApi, AGS_Initialize_RAII* ags,
         bool useAmdDeviceInfo = g_ForceVendorAPI || desc.VendorId == VENDOR_ID_AMD;
         if(useAmdDeviceInfo && amdDeviceInfo)
         {
-            AmdDeviceInfo_Initialize_RAII::DeviceId deviceId = { desc.DeviceId, desc.Revision };
+            AmdDeviceInfo_Initialize_RAII::DeviceId deviceId = { desc.VendorId, desc.DeviceId, desc.Revision };
             amdDeviceInfo->PrintDeviceData(deviceId);
         }
 #endif
