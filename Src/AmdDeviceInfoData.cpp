@@ -22,7 +22,7 @@ For more information, see files README.md, LICENSE.txt.
 #include "ThirdParty/AMD_device_info/device_info.hpp"
 
 // Don't forget to update to the date of the last commit when grabbing a new version!
-static const wchar_t* AMD_DEVICE_INFO_COMPILED_VERSION = L"2026-06-01 (v1.0)";
+static const wchar_t* AMD_DEVICE_INFO_COMPILED_VERSION = L"2026-06-02 (v1.0)";
 
 ENUM_BEGIN(device_info_AsicType)
     ENUM_ITEM(device_info::AsicType::kUndefinedAsic)
