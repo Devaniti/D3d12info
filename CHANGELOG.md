@@ -1,10 +1,16 @@
-# Version 3.19.0 (??)
+# Version 3.19.0 (2026-08-05)
 
 Changes:
 
 - Updated DirectX 12 Agility SDK to 1.619.5 / 1.721.3-preview (#45 - thanks @Dragon31337).
   - Replaced `D3D12_FEATURE_D3D12_OPTIONS_MLIR` with `D3D12_FEATURE_MLIR_COMPUTE_GRAPH_SUPPORT` and `D3D12_FEATURE_MLIR_COMPUTE_GRAPH_VERSION`.
   - Updated `D3D12_FEATURE_DATA_DUMP_FILE`.
+- Updated other third-party libraries (#46 - thanks @Dragon31337).
+  - Updated NVAPI from R580 to R610-Developer.
+    - Added reporting for GPU UUID, GPU overclock status, extended NVLink capabilities and status, and NGX driver feature support.
+  - Updated AMD device_info to v1.0.
+    - Migrated to its new public API and added reporting for derived SIMD, shader-array, VGPR, and LDS-size data.
+  - Updated Vulkan-Headers from 1.4.331 to 1.4.358 and added names for the latest Vulkan driver IDs.
 - Fixed a hang with an infinite loop when passing an incorrect command-line parameter like `-help`.
 
 # Version 3.18.0 (2026-05-28)

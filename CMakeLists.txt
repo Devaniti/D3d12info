@@ -60,7 +60,7 @@ endif()
 
 option(ENABLE_AMD_DEVICE_INFO "Enables usage of AMD device_info library." ON)
 if(ENABLE_AMD_DEVICE_INFO)
-    if(EXISTS "${PROJECT_SOURCE_DIR}/Src/ThirdParty/AMD_device_info/DeviceInfo.h")
+    if(EXISTS "${PROJECT_SOURCE_DIR}/Src/ThirdParty/AMD_device_info/device_info.hpp")
         message(STATUS "AMD device_info library used.")
     else()
         message(FATAL_ERROR "AMD device_info library not found. This is likely due to missing submodule. Please initialize submodules or set ENABLE_AMD_DEVICE_INFO to OFF.")
@@ -153,8 +153,8 @@ function(add_my_executable USE_PREVIEW_AGILITY_SDK)
     if(ENABLE_AMD_DEVICE_INFO)
         target_compile_definitions(${EXE_NAME} PRIVATE USE_AMD_DEVICE_INFO=1)
         set(AMD_DEVICE_INFO_SOURCE_FILES
-            "Src/ThirdParty/AMD_device_info/DeviceInfo.cpp"
-            "Src/ThirdParty/AMD_device_info/DeviceInfo.h")
+            "Src/ThirdParty/AMD_device_info/device_info.cpp"
+            "Src/ThirdParty/AMD_device_info/device_info.hpp")
         target_sources(${EXE_NAME} PRIVATE ${AMD_DEVICE_INFO_SOURCE_FILES})
         source_group("ThirdParty/AMD_device_info" FILES ${AMD_DEVICE_INFO_SOURCE_FILES})
     endif()

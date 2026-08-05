@@ -19,118 +19,107 @@ For more information, see files README.md, LICENSE.txt.
 ////////////////////////////////////////////////////////////////////////////////
 // PRIVATE
 
-#include "ThirdParty/AMD_device_info/DeviceInfo.h"
+#include "ThirdParty/AMD_device_info/device_info.hpp"
 
 // Don't forget to update to the date of the last commit when grabbing a new version!
-static const wchar_t* AMD_DEVICE_INFO_COMPILED_VERSION = L"2025-10-30";
+static const wchar_t* AMD_DEVICE_INFO_COMPILED_VERSION = L"2026-06-01 (v1.0)";
 
-ENUM_BEGIN(GDT_HW_ASIC_TYPE)
-    ENUM_ITEM(GDT_ASIC_TYPE_NONE)
-    ENUM_ITEM(GDT_TAHITI_PRO)
-    ENUM_ITEM(GDT_TAHITI_XT)
-    ENUM_ITEM(GDT_PITCAIRN_PRO)
-    ENUM_ITEM(GDT_PITCAIRN_XT)
-    ENUM_ITEM(GDT_CAPEVERDE_PRO)
-    ENUM_ITEM(GDT_CAPEVERDE_XT)
-    ENUM_ITEM(GDT_OLAND)
-    ENUM_ITEM(GDT_HAINAN)
-    ENUM_ITEM(GDT_BONAIRE)
-    ENUM_ITEM(GDT_HAWAII)
-    ENUM_ITEM(GDT_KALINDI)
-    ENUM_ITEM(GDT_SPECTRE)
-    ENUM_ITEM(GDT_SPECTRE_SL)
-    ENUM_ITEM(GDT_SPECTRE_LITE)
-    ENUM_ITEM(GDT_SPOOKY)
-    ENUM_ITEM(GDT_ICELAND)
-    ENUM_ITEM(GDT_TONGA)
-    ENUM_ITEM(GDT_CARRIZO)
-    ENUM_ITEM(GDT_CARRIZO_EMB)
-    ENUM_ITEM(GDT_FIJI)
-    ENUM_ITEM(GDT_STONEY)
-    ENUM_ITEM(GDT_ELLESMERE)
-    ENUM_ITEM(GDT_BAFFIN)
-    ENUM_ITEM(GDT_GFX8_0_4)
-    ENUM_ITEM(GDT_VEGAM1)
-    ENUM_ITEM(GDT_VEGAM2)
-    ENUM_ITEM(GDT_GFX9_0_0)
-    ENUM_ITEM(GDT_GFX9_0_2)
-    ENUM_ITEM(GDT_GFX9_0_4)
-    ENUM_ITEM(GDT_GFX9_0_6)
-    ENUM_ITEM(GDT_GFX9_0_9)
-    ENUM_ITEM(GDT_GFX9_0_A)
-    ENUM_ITEM(GDT_GFX9_0_C)
-    ENUM_ITEM(GDT_GFX9_4_2)
-    ENUM_ITEM(GDT_GFX10_1_0)
-    ENUM_ITEM(GDT_GFX10_1_0_XL)
-    ENUM_ITEM(GDT_GFX10_1_2)
-    ENUM_ITEM(GDT_GFX10_1_2_X)
-    ENUM_ITEM(GDT_GFX10_1_2_XT)
-    ENUM_ITEM(GDT_GFX10_1_1)
-    ENUM_ITEM(GDT_GFX10_3_0)
-    ENUM_ITEM(GDT_GFX10_3_0_XT)
-    ENUM_ITEM(GDT_GFX10_3_0_XTX)
-    ENUM_ITEM(GDT_GFX10_3_1)
-    ENUM_ITEM(GDT_GFX10_3_2)
-    ENUM_ITEM(GDT_GFX10_3_2_XT)
-    ENUM_ITEM(GDT_GFX10_3_3)
-    ENUM_ITEM(GDT_GFX10_3_4)
-    ENUM_ITEM(GDT_GFX10_3_5)
-    ENUM_ITEM(GDT_GFX10_3_6)
-    ENUM_ITEM(GDT_GFX11_0_0)
-    ENUM_ITEM(GDT_GFX11_0_0_XT)
-    ENUM_ITEM(GDT_GFX11_0_0_GRE)
-    ENUM_ITEM(GDT_GFX11_0_0_M)
-    ENUM_ITEM(GDT_GFX11_0_1)
-    ENUM_ITEM(GDT_GFX11_0_1_XT)
-    ENUM_ITEM(GDT_GFX11_0_2)
-    ENUM_ITEM(GDT_GFX11_0_2_XT)
-    ENUM_ITEM(GDT_GFX11_0_3)
-    ENUM_ITEM(GDT_GFX11_0_3A)
-    ENUM_ITEM(GDT_GFX11_0_3B)
-    ENUM_ITEM(GDT_GFX11_5_0)
-    ENUM_ITEM(GDT_GFX11_5_1)
-    ENUM_ITEM(GDT_GFX11_5_2)
-    ENUM_ITEM(GDT_GFX11_5_3)
-    ENUM_ITEM(GDT_GFX11_5_3A)
-    ENUM_ITEM(GDT_GFX12_0_0)
-    ENUM_ITEM(GDT_GFX12_0_0_XT)
-    ENUM_ITEM(GDT_GFX12_0_1_GRE)
-    ENUM_ITEM(GDT_GFX12_0_1)
-    ENUM_ITEM(GDT_GFX12_0_1_XT)
-    ENUM_ITEM(GDT_LAST)
-ENUM_END(GDT_HW_ASIC_TYPE)
+ENUM_BEGIN(device_info_AsicType)
+    ENUM_ITEM(device_info::AsicType::kUndefinedAsic)
+    ENUM_ITEM(device_info::AsicType::kTahitiPro)
+    ENUM_ITEM(device_info::AsicType::kTahitiXt)
+    ENUM_ITEM(device_info::AsicType::kPitcairnPro)
+    ENUM_ITEM(device_info::AsicType::kPitcairnXt)
+    ENUM_ITEM(device_info::AsicType::kCapeVerdePro)
+    ENUM_ITEM(device_info::AsicType::kCapeVerdeXt)
+    ENUM_ITEM(device_info::AsicType::kOland)
+    ENUM_ITEM(device_info::AsicType::kHainan)
+    ENUM_ITEM(device_info::AsicType::kBonaire)
+    ENUM_ITEM(device_info::AsicType::kHawaii)
+    ENUM_ITEM(device_info::AsicType::kKalindi)
+    ENUM_ITEM(device_info::AsicType::kSpectre)
+    ENUM_ITEM(device_info::AsicType::kSpectreSl)
+    ENUM_ITEM(device_info::AsicType::kSpectreLite)
+    ENUM_ITEM(device_info::AsicType::kSpooky)
+    ENUM_ITEM(device_info::AsicType::kIceland)
+    ENUM_ITEM(device_info::AsicType::kTonga)
+    ENUM_ITEM(device_info::AsicType::kCarrizo)
+    ENUM_ITEM(device_info::AsicType::kCarrizoEmb)
+    ENUM_ITEM(device_info::AsicType::kFiji)
+    ENUM_ITEM(device_info::AsicType::kStoney)
+    ENUM_ITEM(device_info::AsicType::kEllesmere)
+    ENUM_ITEM(device_info::AsicType::kBaffin)
+    ENUM_ITEM(device_info::AsicType::kGfx8_0_4)
+    ENUM_ITEM(device_info::AsicType::kVegaM1)
+    ENUM_ITEM(device_info::AsicType::kVegaM2)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_0)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_2)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_4)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_6)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_9)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_A)
+    ENUM_ITEM(device_info::AsicType::kGfx9_0_C)
+    ENUM_ITEM(device_info::AsicType::kGfx9_4_2)
+    ENUM_ITEM(device_info::AsicType::kGfx9_5_0)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_0)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_0Xl)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_2)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_2X)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_2Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx10_1_1)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_0)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_0Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_0Xtx)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_1)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_2)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_2Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_3)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_4)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_5)
+    ENUM_ITEM(device_info::AsicType::kGfx10_3_6)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_0)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_0Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_0Gre)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_0M)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_1)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_1Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_2)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_2Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_3)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_3A)
+    ENUM_ITEM(device_info::AsicType::kGfx11_0_3B)
+    ENUM_ITEM(device_info::AsicType::kGfx11_5_0)
+    ENUM_ITEM(device_info::AsicType::kGfx11_5_1)
+    ENUM_ITEM(device_info::AsicType::kGfx11_5_2)
+    ENUM_ITEM(device_info::AsicType::kGfx11_5_3)
+    ENUM_ITEM(device_info::AsicType::kGfx11_5_3A)
+    ENUM_ITEM(device_info::AsicType::kGfx12_0_0)
+    ENUM_ITEM(device_info::AsicType::kGfx12_0_0Xt)
+    ENUM_ITEM(device_info::AsicType::kGfx12_0_1Gre)
+    ENUM_ITEM(device_info::AsicType::kGfx12_0_1)
+    ENUM_ITEM(device_info::AsicType::kGfx12_0_1Xt)
+    ENUM_ITEM(device_info::AsicType::kTotalAsics)
+ENUM_END(device_info_AsicType)
 
-ENUM_BEGIN(GDT_HW_GENERATION)
-    ENUM_ITEM(GDT_HW_GENERATION_NONE)
-    ENUM_ITEM(GDT_HW_GENERATION_NVIDIA)
-    ENUM_ITEM(GDT_HW_GENERATION_INTEL)
-    ENUM_ITEM(GDT_HW_GENERATION_SOUTHERNISLAND)
-    ENUM_ITEM(GDT_HW_GENERATION_FIRST_AMD)
-    ENUM_ITEM(GDT_HW_GENERATION_SEAISLAND)
-    ENUM_ITEM(GDT_HW_GENERATION_VOLCANICISLAND)
-    ENUM_ITEM(GDT_HW_GENERATION_GFX9)
-    ENUM_ITEM(GDT_HW_GENERATION_GFX10)
-    ENUM_ITEM(GDT_HW_GENERATION_GFX103)
-    ENUM_ITEM(GDT_HW_GENERATION_GFX11)
-    ENUM_ITEM(GDT_HW_GENERATION_CDNA)
-    ENUM_ITEM(GDT_HW_GENERATION_CDNA2)
-    ENUM_ITEM(GDT_HW_GENERATION_CDNA3)
-    ENUM_ITEM(GDT_HW_GENERATION_GFX12)
-    ENUM_ITEM(GDT_HW_GENERATION_LAST)
-ENUM_END(GDT_HW_GENERATION)
-
-static const GDT_GfxCardInfo* FindCardInfo(const AmdDeviceInfo_Initialize_RAII::DeviceId& id)
-{
-    for(size_t i = 0; i < gs_cardInfoSize; ++i)
-    {
-        const GDT_GfxCardInfo& info = gs_cardInfo[i];
-        if(info.m_deviceID == id.deviceId && (info.m_revID == id.revisionId || info.m_revID == REVISION_ID_ANY))
-        {
-            return &info;
-        }
-    }
-    return nullptr;
-}
+ENUM_BEGIN(device_info_HwGeneration)
+    ENUM_ITEM(device_info::HwGeneration::kUndefinedGeneration)
+    ENUM_ITEM(device_info::HwGeneration::kNvidia)
+    ENUM_ITEM(device_info::HwGeneration::kIntel)
+    ENUM_ITEM(device_info::HwGeneration::kSouthernIsland)
+    ENUM_ITEM(device_info::HwGeneration::kSeaIsland)
+    ENUM_ITEM(device_info::HwGeneration::kVolcanicIsland)
+    ENUM_ITEM(device_info::HwGeneration::kGfx9)
+    ENUM_ITEM(device_info::HwGeneration::kGfx10)
+    ENUM_ITEM(device_info::HwGeneration::kGfx10_3)
+    ENUM_ITEM(device_info::HwGeneration::kGfx11)
+    ENUM_ITEM(device_info::HwGeneration::kCdna)
+    ENUM_ITEM(device_info::HwGeneration::kCdna2)
+    ENUM_ITEM(device_info::HwGeneration::kCdna3)
+    ENUM_ITEM(device_info::HwGeneration::kGfx12)
+    ENUM_ITEM(device_info::HwGeneration::kCdna4)
+    ENUM_ITEM(device_info::HwGeneration::kGfx11_5)
+    ENUM_ITEM(device_info::HwGeneration::kTotalHwGenerations)
+ENUM_END(device_info_HwGeneration)
 
 ////////////////////////////////////////////////////////////////////////////////
 // PUBLIC
@@ -143,38 +132,50 @@ void AmdDeviceInfo_Initialize_RAII::PrintStaticParams()
 
 void AmdDeviceInfo_Initialize_RAII::PrintDeviceData(const DeviceId& id)
 {
-    const GDT_GfxCardInfo* const cardInfo = FindCardInfo(id);
+    const std::optional<device_info::CardInfo> cardInfo = device_info::GetCardInfo(
+        { .vendor_id = id.vendorId, .device_id = id.deviceId, .revision_id = id.revisionId });
     if(!cardInfo)
         return;
 
     ReportFormatter& formatter = ReportFormatter::GetInstance();
 
     {
-        ReportScopeObject region{ L"AMD GDT_GfxCardInfo" };
-        formatter.AddFieldEnum(L"asicType", cardInfo->m_asicType, Enum_GDT_HW_ASIC_TYPE);
-        formatter.AddFieldEnum(L"generation", cardInfo->m_generation, Enum_GDT_HW_GENERATION);
-        formatter.AddFieldBool(L"APU", cardInfo->m_bAPU ? TRUE : FALSE);
-        formatter.AddFieldString(L"CALName", StrToWstr(cardInfo->m_szCALName, CP_UTF8).c_str());
-        formatter.AddFieldString(L"MarketingName", StrToWstr(cardInfo->m_szMarketingName, CP_UTF8).c_str());
+        ReportScopeObject region{ L"AMD device_info::CardInfo" };
+        formatter.AddFieldEnum(L"asicType", uint32_t(cardInfo->asic_type), Enum_device_info_AsicType);
+        formatter.AddFieldEnum(L"generation", uint32_t(cardInfo->generation), Enum_device_info_HwGeneration);
+        formatter.AddFieldBool(L"APU", cardInfo->is_apu);
+        // device_info v1.0 replaces the old CAL name with the compiler/driver GFX target.
+        formatter.AddFieldString(L"GfxTarget", StrToWstr(cardInfo->gfx_target, CP_UTF8).c_str());
+        formatter.AddFieldString(L"MarketingName", StrToWstr(cardInfo->marketing_name, CP_UTF8).c_str());
     }
 
-    if(cardInfo->m_asicType >= 0 && cardInfo->m_asicType < gs_deviceInfoSize)
+    // device_info v1.0 uses an empty optional instead of an in-structure validity flag.
+    if(const std::optional<device_info::DeviceInfo> deviceInfo = device_info::GetDeviceInfo(*cardInfo))
     {
-        const GDT_DeviceInfo& devInfo = gs_deviceInfo[cardInfo->m_asicType];
-        //if(devInfo.m_deviceInfoValid)
+        ReportScopeObject region(L"AMD device_info::DeviceInfo");
+        formatter.AddFieldUint32(L"NumShaderEngines", deviceInfo->num_shader_engines); // Number of shader engines.
+        formatter.AddFieldUint32(L"MaxWavePerSIMD", deviceInfo->max_wave_per_simd); // Number of wave slots per SIMD.
+        formatter.AddFieldUint32(
+            L"ClocksPrim", deviceInfo->clocks_per_primitive); // Number of clocks to process a primitive.
+        formatter.AddFieldUint32(L"NumSQMaxCounters", deviceInfo->num_sq_counters); // Maximum number of SQ counters.
+        formatter.AddFieldUint32(L"NumPrimPipes", deviceInfo->num_prim_pipes); // Number of primitive pipes.
+        formatter.AddFieldUint32(L"WaveSize", deviceInfo->wave_size); // Wavefront size.
+        formatter.AddFieldUint32(
+            L"NumSHPerSE", deviceInfo->num_sh_per_se); // Number of shader arrays per shader engine.
+        formatter.AddFieldUint32(L"NumCUs", deviceInfo->num_cus); // Number of compute units.
+        formatter.AddFieldUint32(L"NumSIMDPerCU", deviceInfo->num_simd_per_cu); // Number of SIMDs per compute unit.
+        formatter.AddFieldUint32(L"NumVGPRPerSIMD", deviceInfo->num_vgpr_per_simd); // Number of VGPRs per SIMD.
+        formatter.AddFieldUint32(L"TotalSIMDs", device_info::TotalSimds(*deviceInfo)); // Total number of SIMDs.
+        formatter.AddFieldUint32(
+            L"TotalShaderArrays", device_info::TotalShaderArrays(*deviceInfo)); // Total number of shader arrays.
+        // Returns zero for older architectures where the number of VGPRs per SIMD is unknown.
+        formatter.AddFieldUint32(L"TotalVGPRs", device_info::TotalVgprs(*deviceInfo));
+
+        if(const std::optional<uint32_t> totalLdsSize =
+                device_info::GetTotalLdsSizeInBytes(cardInfo->generation, *deviceInfo))
         {
-            ReportScopeObject region(L"AMD GDT_DeviceInfo");
-            formatter.AddFieldUint64(L"NumShaderEngines", devInfo.m_nNumShaderEngines); // Number of shader engines.
-            formatter.AddFieldUint64(L"MaxWavePerSIMD", devInfo.m_nMaxWavePerSIMD); // Number of wave slots per SIMD.
-            formatter.AddFieldUint64(L"ClocksPrim",
-                devInfo.m_suClocksPrim); // Number of clocks it takes to process a primitive.
-            formatter.AddFieldUint64(L"NumSQMaxCounters", devInfo.m_nNumSQMaxCounters); // Max number of SQ counters.
-            formatter.AddFieldUint64(L"NumPrimPipes", devInfo.m_nNumPrimPipes);         // Number of primitive pipes.
-            formatter.AddFieldUint64(L"WaveSize", devInfo.m_nWaveSize);                 // Wavefront size.
-            formatter.AddFieldUint64(L"NumSHPerSE", devInfo.m_nNumSHPerSE); // Number of shader array per Shader Engine.
-            formatter.AddFieldUint64(L"NumCUs", devInfo.m_nNumCUs); // Number of Compute Units
-            formatter.AddFieldUint64(L"NumSIMDPerCU", devInfo.m_nNumSIMDPerCU); // Number of SIMDs per Compute unit.
-            formatter.AddFieldUint64(L"NumVGPRPerSIMD", devInfo.m_nNumVGPRPerSIMD); // Number of VGPRs per SIMD.
+            // Total local data share memory across all compute units.
+            formatter.AddFieldUint32(L"TotalLDSSizeInBytes", *totalLdsSize);
         }
     }
 }
