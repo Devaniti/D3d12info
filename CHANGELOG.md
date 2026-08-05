@@ -11,6 +11,7 @@ Changes:
   - Updated AMD device_info to v1.0.
     - Migrated to its new public API and added reporting for derived SIMD, shader-array, VGPR, and LDS-size data.
   - Updated Vulkan-Headers from 1.4.331 to 1.4.358 and added names for the latest Vulkan driver IDs.
+- Added Moore Threads as a recognized VendorId and SubsystemVendorId.
 - Fixed a hang with an infinite loop when passing an incorrect command-line parameter like `-help`.
 
 # Version 3.18.0 (2026-05-28)
