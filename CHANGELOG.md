@@ -2,6 +2,9 @@
 
 Changes:
 
+- Updated DirectX 12 Agility SDK to 1.619.5 / 1.721.3-preview (#45 - thanks @Dragon31337).
+  - Replaced `D3D12_FEATURE_D3D12_OPTIONS_MLIR` with `D3D12_FEATURE_MLIR_COMPUTE_GRAPH_SUPPORT` and `D3D12_FEATURE_MLIR_COMPUTE_GRAPH_VERSION`.
+  - Updated `D3D12_FEATURE_DATA_DUMP_FILE`.
 - Fixed a hang with an infinite loop when passing an incorrect command-line parameter like `-help`.
 
 # Version 3.18.0 (2026-05-28)

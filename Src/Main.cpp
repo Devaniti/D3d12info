@@ -621,7 +621,7 @@ static void Print_D3D12_FEATURE_DATA_DUMP_FILE(const D3D12_FEATURE_DATA_DUMP_FIL
 {
     ReportScopeObject scope(L"D3D12_FEATURE_DATA_DUMP_FILE");
     ReportFormatter& formatter = ReportFormatter::GetInstance();
-    formatter.AddFieldBool(L"Supported", o.Supported);
+    formatter.AddFieldBool(L"SupportedByOS", o.SupportedByOS);
     formatter.AddFieldEnum(L"DumpFileDriverTier", o.DumpFileDriverTier, Enum_D3D12_DUMP_FILE_DRIVER_TIER);
     formatter.AddFieldFlags(L"DumpFileDriverOptionsMask", o.DumpFileDriverOptionsMask, Enum_D3D12_DUMP_FILE_DRIVER_OPTIONS);
 }
@@ -637,10 +637,20 @@ static void Print_D3D12_FEATURE_DATA_LINEAR_ALGEBRA_SUPPORT(const D3D12_FEATURE_
 #endif // #if DIRECT3D_LINEAR_ALGEBRA
 
 #if DIRECT3D_MLIR_PROGRAMS
-static void Print_D3D12_FEATURE_DATA_D3D12_OPTIONS_MLIR(const D3D12_FEATURE_DATA_D3D12_OPTIONS_MLIR& o)
+static void Print_D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_SUPPORT(
+    const D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_SUPPORT& o)
 {
-    ReportScopeObject scope(L"D3D12_FEATURE_DATA_D3D12_OPTIONS_MLIR");
-    ReportFormatter::GetInstance().AddFieldEnum(L"MlirProgramsTier", o.MlirProgramsTier, Enum_D3D12_MLIR_PROGRAMS_TIER);
+    ReportScopeObject scope(L"D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_SUPPORT");
+    ReportFormatter& formatter = ReportFormatter::GetInstance();
+    formatter.AddFieldBool(L"MultisubgraphPartitionsSupported", o.MultisubgraphPartitionsSupported);
+    formatter.AddFieldBool(L"CpuBindingSupported", o.CpuBindingSupported);
+}
+
+static void Print_D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_VERSION(
+    const D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_VERSION& o)
+{
+    ReportScopeObject scope(L"D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_VERSION");
+    ReportFormatter::GetInstance().AddFieldMicrosoftVersion(L"HighestVersion", o.HighestVersion.Version);
 }
 #endif // #if DIRECT3D_MLIR_PROGRAMS
 
@@ -1293,10 +1303,19 @@ static void PrintDeviceOptions(ID3D12Device* device)
 #endif
 
 #if DIRECT3D_MLIR_PROGRAMS
-    if(D3D12_FEATURE_DATA_D3D12_OPTIONS_MLIR optionsMlir = {};
-        SUCCEEDED(device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS_MLIR, &optionsMlir, sizeof(optionsMlir))))
+    if(D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_SUPPORT mlirComputeGraphSupport = {};
+        SUCCEEDED(device->CheckFeatureSupport(D3D12_FEATURE_MLIR_COMPUTE_GRAPH_SUPPORT,
+            &mlirComputeGraphSupport, sizeof(mlirComputeGraphSupport))))
     {
-        Print_D3D12_FEATURE_DATA_D3D12_OPTIONS_MLIR(optionsMlir);
+        Print_D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_SUPPORT(mlirComputeGraphSupport);
+    }
+
+    D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_VERSION mlirComputeGraphVersion = {};
+    mlirComputeGraphVersion.HighestVersion.Version = UINT64_MAX;
+    if(SUCCEEDED(device->CheckFeatureSupport(D3D12_FEATURE_MLIR_COMPUTE_GRAPH_VERSION,
+           &mlirComputeGraphVersion, sizeof(mlirComputeGraphVersion))))
+    {
+        Print_D3D12_FEATURE_DATA_MLIR_COMPUTE_GRAPH_VERSION(mlirComputeGraphVersion);
     }
 #endif
 
