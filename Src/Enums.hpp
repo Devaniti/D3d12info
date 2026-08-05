@@ -67,6 +67,7 @@ static const EnumItem Enum_VendorId[] = {
     { L"NVIDIA",    0x10de     },
     { L"Microsoft", 0x1414     },
     { L"Parallels", 0x1ab8     },
+    { L"Moore Threads", 0x1ed5 },
     { L"Qualcomm",  0x5143     },
     { L"Intel",     0x8086     },
     // ACPI IDs
@@ -114,6 +115,7 @@ static const EnumItem Enum_SubsystemVendorId[] = {
     { L"Razer",              0x1a58     },
     { L"Parallels",          0x1ab8     },
     { L"Sapphire",           0x1da2     },
+    { L"Moore Threads",      0x1ed5     },
     { L"Qualcomm",           0x5143     },
     { L"Intel",              0x8086     },
     { NULL,                  UINT32_MAX }
