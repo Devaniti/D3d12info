@@ -420,7 +420,7 @@ static void Print_D3D12_FEATURE_DATA_D3D12_OPTIONS9(const D3D12_FEATURE_DATA_D3D
     formatter.AddFieldBool(L"AtomicInt64OnGroupSharedSupported", o.AtomicInt64OnGroupSharedSupported);
     formatter.AddFieldBool(
         L"DerivativesInMeshAndAmplificationShadersSupported", o.DerivativesInMeshAndAmplificationShadersSupported);
-    formatter.AddFieldEnum(L"WaveMMATier", o.WaveMMATier, Enum_D3D12_WAVE_MMA_TIER);
+    //formatter.AddFieldEnum(L"WaveMMATier", o.WaveMMATier, Enum_D3D12_WAVE_MMA_TIER);
 }
 
 static void Print_D3D12_FEATURE_DATA_D3D12_OPTIONS10(const D3D12_FEATURE_DATA_D3D12_OPTIONS10& o)

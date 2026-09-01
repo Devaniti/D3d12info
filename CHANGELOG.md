@@ -1,3 +1,11 @@
+# Version 3.20.0 (TBD)
+
+Changes:
+
+- Removed `D3D12_FEATURE_DATA_D3D12_OPTIONS9::WaveMMATier` as this is an abandoned feature.
+
+Compiled with DirectX 12 Agility SDK 1.619.5 ("D3d12info.exe") / 1.721.3-preview ("D3d12info\_preview.exe"), AMD AGS 6.3.0, AMD device\_info v1.0 from 2026-06-02, NVAPI R610, Intel GPU Detect from 2025-04-28 (commit hash `649cf14acd63e1d7ad7e30d3c558fb447f9f8c5b`).
+
 # Version 3.19.0 (2026-08-05)
 
 Changes:
